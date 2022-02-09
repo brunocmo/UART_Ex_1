@@ -51,7 +51,7 @@ void Comms::solicitar(std::string solicitacao){
         printf("Erro no envio de dados - TX\n");
     }
 
-    sleep(2);
+    sleep(1);
 
     if (teste[0] == 0xA1 || teste[0] == 0xB1 ) {
         receber(1);
