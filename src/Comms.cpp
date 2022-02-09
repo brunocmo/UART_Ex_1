@@ -175,6 +175,7 @@ void Comms::enviar(std::string solicitacao){
 void Comms::receber(int flag) {
     
     int valorInteiro{0};
+    float valorPontoFlut{0.0f};
 
     if(get_uart0_filestream() != -1) {
 
@@ -197,6 +198,7 @@ void Comms::receber(int flag) {
                 break;
 
             case 2 : 
+                std::memcpy(&valorPontoFlut, rx_buffer, 4);
                 printf("Mensagem de comprimento %d: %s\n", rx_length, rx_buffer);
                 break;
 
