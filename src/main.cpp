@@ -4,9 +4,11 @@ int main() {
 
     Comms ardu;
 
-    char inteiroTeste[] = { 0, 0 , 0 , 4 };
+    char inteiroTeste[] = "0004";
 
-    char realTeste[] = { 0, 0, 0, 3}; 
+    char realTeste[] = "0002"; 
+
+    std::string fraseTeste{"Olá Mundo!"};
 
     ardu.pedidoInteiro();
 
@@ -18,7 +20,7 @@ int main() {
 
     ardu.enviarReal(realTeste);
 
-    ardu.enviarString("Bom dia!");
+    ardu.enviarString(fraseTeste);
 
     return 0;
 }

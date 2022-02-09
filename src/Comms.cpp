@@ -98,7 +98,7 @@ void Comms::pedidoString() {
 }
 
 
-void Comms::enviarInteiro(char inteiroEnviado[]) {
+void Comms::enviarInteiro(char inteiroEnviado[4]) {
 
     char SolicitacaoInteiro;
     SolicitacaoInteiro = 0xB1;
@@ -110,7 +110,7 @@ void Comms::enviarInteiro(char inteiroEnviado[]) {
     solicitar(stringTemp);
 }
 
-void Comms::enviarReal(char floatEnviado[]) {
+void Comms::enviarReal(char floatEnviado[4]) {
 
     char SolicitacaoFloat;
     SolicitacaoFloat = 0xB2;
@@ -122,19 +122,52 @@ void Comms::enviarReal(char floatEnviado[]) {
     solicitar(stringTemp);
 }
 
-void Comms::enviarString(char stringEnviado[]) {
+void Comms::enviarString(std::string stringEnviado) {
 
     char SolicitacaoString;
     SolicitacaoString = 0xB3;
 
     std::string contador = stringEnviado;
-    char quantidadePalavras = contador.length();
+    char quantidadePalavras = 'contador.length()';
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoString);
     stringTemp = stringTemp + quantidadePalavras + stringEnviado + matricula;
 
-    solicitar(stringTemp);
+    enviar(stringTemp);
+}
+
+void Comms::enviar(std::string solicitacao){
+    
+    init();
+    
+    unsigned char teste[solicitacao.length()];
+
+    teste[0] = solicitacao.at(0);
+    teste[1] = solicitacao.at(1);
+
+    for(int i{2}; i<solicitacao.length() ; i++) {
+        
+        if( i < solicitacao.length()-4) {
+            teste[i] = (solicitacao.at(i));
+        }else {
+            teste[i] = (solicitacao.at(i)-48);
+        }
+        
+        printf("%d --- %d\n", i, teste[i]);
+    }
+
+    int count = write( get_uart0_filestream(), &teste, solicitacao.length());
+
+    printf("Numero de bytes enviados: %d\n", count);
+
+    if(count < 0) {
+        printf("Erro no envio de dados - TX\n");
+    }
+
+    sleep(2);
+
+    receber(3);
 }
 
 
@@ -181,6 +214,8 @@ void Comms::receber(int flag) {
 
     close(get_uart0_filestream());
 }
+
+
 
 // int Comms::binToDecimal() {
     

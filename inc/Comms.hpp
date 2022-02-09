@@ -29,7 +29,7 @@ class Comms {
 
         void enviarInteiro(char inteiroEnviado[]);
         void enviarReal(char floatEnviado[]);
-        void enviarString(char stringEnviado[]);
+        void enviarString(std::string stringEnviado);
 
         void solicitar(std::string solicitacao);
         void enviar(std::string solicitacao);
