@@ -192,14 +192,14 @@ void Comms::receber(int flag) {
             {
             case 1 : 
 
-                std::memcpy(&valorInteiro, rx_buffer, 4);
+                std::memcpy(&valorInteiro, rx_buffer, sizeof(int));
 
                 printf("Mensagem de comprimento %d: %d\n", rx_length, valorInteiro);
                 break;
 
             case 2 : 
                 std::memcpy(&valorPontoFlut, rx_buffer, 4);
-                printf("Mensagem de comprimento %d: %s\n", rx_length, rx_buffer);
+                printf("Mensagem de comprimento %d: %f\n", rx_length, valorPontoFlut);
                 break;
 
             case 3 : 
