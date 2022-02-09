@@ -4,7 +4,7 @@ int main() {
 
     Comms ardu;
 
-    int inteiroTeste = 4;
+    int inteiroTeste = 64000;
 
     float realTeste = 16.18f; 
 
@@ -14,13 +14,13 @@ int main() {
 
     // ardu.pedidoReal();
 
-    // ardu.pedidoString();
+    ardu.pedidoString();
 
-    ardu.enviarInteiro(inteiroTeste);
+    // ardu.enviarInteiro(inteiroTeste);
 
     // ardu.enviarReal(realTeste);
 
-    // ardu.enviarString(fraseTeste);
+    ardu.enviarString(fraseTeste);
 
     return 0;
 }

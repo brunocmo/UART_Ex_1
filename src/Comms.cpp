@@ -123,7 +123,10 @@ void Comms::enviarInteiro(int inteiroEnviado) {
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoInteiro);
-    stringTemp = stringTemp + InteiroBytes;
+    stringTemp.push_back(InteiroBytes[0]);
+    stringTemp.push_back(InteiroBytes[1]);
+    stringTemp.push_back(InteiroBytes[2]);
+    stringTemp.push_back(InteiroBytes[3]);
     stringTemp.push_back(matricula[0]);
     stringTemp.push_back(matricula[1]);
     stringTemp.push_back(matricula[2]);
@@ -144,7 +147,10 @@ void Comms::enviarReal(float floatEnviado) {
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoFloat);
-    stringTemp = stringTemp + RealBytes;
+    stringTemp.push_back(RealBytes[0]);
+    stringTemp.push_back(RealBytes[1]);
+    stringTemp.push_back(RealBytes[2]);
+    stringTemp.push_back(RealBytes[3]);
     stringTemp.push_back(matricula[0]);
     stringTemp.push_back(matricula[1]);
     stringTemp.push_back(matricula[2]);
