@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <bitset>
+#include <iostream>
 
 
 class Comms {

@@ -69,7 +69,10 @@ void Comms::pedidoInteiro() {
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoInteiro);
-    stringTemp = stringTemp + matricula;
+    stringTemp.push_back(matricula[0]);
+    stringTemp.push_back(matricula[1]);
+    stringTemp.push_back(matricula[2]);
+    stringTemp.push_back(matricula[3]);
 
     solicitar(stringTemp);
 }
@@ -81,7 +84,12 @@ void Comms::pedidoReal() {
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoReal);
-    stringTemp = stringTemp + matricula;
+    stringTemp.push_back(matricula[0]);
+    stringTemp.push_back(matricula[1]);
+    stringTemp.push_back(matricula[2]);
+    stringTemp.push_back(matricula[3]);
+
+    solicitar(stringTemp);
 
     solicitar(stringTemp);
 }
@@ -93,7 +101,12 @@ void Comms::pedidoString() {
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoString);
-    stringTemp = stringTemp + matricula;
+    stringTemp.push_back(matricula[0]);
+    stringTemp.push_back(matricula[1]);
+    stringTemp.push_back(matricula[2]);
+    stringTemp.push_back(matricula[3]);
+
+    solicitar(stringTemp);
 
     solicitar(stringTemp);
 }
@@ -110,7 +123,12 @@ void Comms::enviarInteiro(int inteiroEnviado) {
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoInteiro);
-    stringTemp = stringTemp + InteiroBytes + matricula;
+    stringTemp = stringTemp + InteiroBytes;
+    stringTemp.push_back(matricula[0]);
+    stringTemp.push_back(matricula[1]);
+    stringTemp.push_back(matricula[2]);
+    stringTemp.push_back(matricula[3]);
+
 
     solicitar(stringTemp);
 }
@@ -126,7 +144,11 @@ void Comms::enviarReal(float floatEnviado) {
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoFloat);
-    stringTemp = stringTemp + RealBytes + matricula;
+    stringTemp = stringTemp + RealBytes;
+    stringTemp.push_back(matricula[0]);
+    stringTemp.push_back(matricula[1]);
+    stringTemp.push_back(matricula[2]);
+    stringTemp.push_back(matricula[3]);
 
     solicitar(stringTemp);
 }
@@ -141,7 +163,12 @@ void Comms::enviarString(std::string stringEnviado) {
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoString);
-    stringTemp = stringTemp + quantidadePalavras + stringEnviado + matricula;
+    stringTemp.push_back(quantidadePalavras);
+    stringTemp = stringTemp + stringEnviado;
+    stringTemp.push_back(matricula[0]);
+    stringTemp.push_back(matricula[1]);
+    stringTemp.push_back(matricula[2]);
+    stringTemp.push_back(matricula[3]);
 
     solicitar(stringTemp);
 }
