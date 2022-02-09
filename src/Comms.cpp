@@ -97,6 +97,45 @@ void Comms::pedidoString() {
     solicitar(stringTemp);
 }
 
+
+void Comms::enviarInteiro(char inteiroEnviado[]) {
+
+    char SolicitacaoInteiro;
+    SolicitacaoInteiro = 0xB1;
+
+    std::string stringTemp{""};
+    stringTemp.push_back(SolicitacaoInteiro);
+    stringTemp = stringTemp + inteiroEnviado + matricula;
+
+    solicitar(stringTemp);
+}
+
+void Comms::enviarReal(char floatEnviado[]) {
+
+    char SolicitacaoFloat;
+    SolicitacaoFloat = 0xB2;
+
+    std::string stringTemp{""};
+    stringTemp.push_back(SolicitacaoFloat);
+    stringTemp = stringTemp + floatEnviado + matricula;
+
+    solicitar(stringTemp);
+}
+
+void Comms::enviarString(char stringEnviado[]) {
+
+    char SolicitacaoString;
+    SolicitacaoString = 0xB3;
+
+    std::string stringTemp{""};
+    stringTemp.push_back(SolicitacaoString);
+    stringTemp = stringTemp + stringEnviado + matricula;
+
+    solicitar(stringTemp);
+}
+
+
+
 void Comms::receber(int flag) {
     
     int valorInteiro{0};
@@ -140,8 +179,15 @@ void Comms::receber(int flag) {
     close(get_uart0_filestream());
 }
 
-int Comms::binToDecimal() {
+// int Comms::binToDecimal() {
     
+// }
+
+void Comms::enviar() {
+
+    init();
+
+
 }
 
 int Comms::get_uart0_filestream() {

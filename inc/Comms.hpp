@@ -27,6 +27,10 @@ class Comms {
         void pedidoReal();
         void pedidoString();
 
+        void enviarInteiro(char inteiroEnviado[]);
+        void enviarReal(char floatEnviado[]);
+        void enviarString(char stringEnviado[]);
+
         void solicitar(std::string solicitacao);
         void enviar();
         void receber(int flag);
