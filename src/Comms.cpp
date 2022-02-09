@@ -32,11 +32,11 @@ void Comms::solicitar(std::string solicitacao){
     
     init();
     
-    unsigned char teste[solicitacao.length()];
+    unsigned char teste[255];
 
     teste[0] = solicitacao.at(0);
 
-    for(int i{1}; i<solicitacao.length() ; i++) {
+    for(unsigned int i{1}; i<solicitacao.length() ; i++) {
         teste[i] = (solicitacao.at(i)-48);
 
         printf("%d --- %d\n", i, teste[i]);
@@ -128,7 +128,7 @@ void Comms::enviarString(std::string stringEnviado) {
     SolicitacaoString = 0xB3;
 
     std::string contador = stringEnviado;
-    char quantidadePalavras = 'contador.length()';
+    char quantidadePalavras = (int)(contador.length());
 
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoString);
@@ -141,12 +141,12 @@ void Comms::enviar(std::string solicitacao){
     
     init();
     
-    unsigned char teste[solicitacao.length()];
+    unsigned char teste[255];
 
     teste[0] = solicitacao.at(0);
     teste[1] = solicitacao.at(1);
 
-    for(int i{2}; i<solicitacao.length() ; i++) {
+    for(unsigned int i{2}; i<solicitacao.length() ; i++) {
         
         if( i < solicitacao.length()-4) {
             teste[i] = (solicitacao.at(i));
@@ -190,16 +190,14 @@ void Comms::receber(int flag) {
             switch (flag)
             {
             case 1 : 
-                valorInteiro += rx_buffer[0];
-                valorInteiro += rx_buffer[1];
-                valorInteiro += rx_buffer[2];
-                valorInteiro += rx_buffer[3];
+
+                std::memcpy(&valorInteiro, rx_buffer, 4);
 
                 printf("Mensagem de comprimento %d: %d\n", rx_length, valorInteiro);
                 break;
 
             case 2 : 
-                printf("Mensagem de comprimento %d: %f\n", rx_length, rx_buffer);
+                printf("Mensagem de comprimento %d: %s\n", rx_length, rx_buffer);
                 break;
 
             case 3 : 

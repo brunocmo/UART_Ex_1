@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string>
+#include <cstring>
 #include <fcntl.h>
 #include <termios.h>
+#include <bitset>
 
 
 class Comms {

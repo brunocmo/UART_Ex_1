@@ -16,11 +16,11 @@ int main() {
 
     ardu.pedidoString();
 
-    ardu.enviarInteiro(inteiroTeste);
+    // ardu.enviarInteiro(inteiroTeste);
 
-    ardu.enviarReal(realTeste);
+    // ardu.enviarReal(realTeste);
 
-    ardu.enviarString(fraseTeste);
+    // ardu.enviarString(fraseTeste);
 
     return 0;
 }
