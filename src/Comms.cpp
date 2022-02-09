@@ -127,9 +127,12 @@ void Comms::enviarString(char stringEnviado[]) {
     char SolicitacaoString;
     SolicitacaoString = 0xB3;
 
+    std::string contador = stringEnviado;
+    char quantidadePalavras = contador.length();
+
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoString);
-    stringTemp = stringTemp + stringEnviado + matricula;
+    stringTemp = stringTemp + quantidadePalavras + stringEnviado + matricula;
 
     solicitar(stringTemp);
 }
@@ -183,12 +186,6 @@ void Comms::receber(int flag) {
     
 // }
 
-void Comms::enviar() {
-
-    init();
-
-
-}
 
 int Comms::get_uart0_filestream() {
     return uart0_filestream;

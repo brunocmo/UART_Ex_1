@@ -32,7 +32,7 @@ class Comms {
         void enviarString(char stringEnviado[]);
 
         void solicitar(std::string solicitacao);
-        void enviar();
+        void enviar(std::string solicitacao);
         void receber(int flag);
 
         int get_uart0_filestream();
