@@ -16,7 +16,7 @@ class Comms {
         int uart0_filestream;
         std::string palavra;
         struct termios options;
-        std::string matricula;
+        char matricula[4];
 
     public:
 
@@ -29,8 +29,8 @@ class Comms {
         void pedidoReal();
         void pedidoString();
 
-        void enviarInteiro(char inteiroEnviado[]);
-        void enviarReal(char floatEnviado[]);
+        void enviarInteiro(int inteiroEnviado);
+        void enviarReal(float floatEnviado);
         void enviarString(std::string stringEnviado);
 
         void solicitar(std::string solicitacao);

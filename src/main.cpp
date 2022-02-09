@@ -4,19 +4,19 @@ int main() {
 
     Comms ardu;
 
-    char inteiroTeste[] = "0004";
+    int inteiroTeste = 4;
 
-    char realTeste[] = "0002"; 
+    float realTeste = 16.18f; 
 
     std::string fraseTeste{"Olá Mundo!"};
 
     ardu.pedidoInteiro();
 
-    ardu.pedidoReal();
+    // ardu.pedidoReal();
 
-    ardu.pedidoString();
+    // ardu.pedidoString();
 
-    // ardu.enviarInteiro(inteiroTeste);
+    //ardu.enviarInteiro(inteiroTeste);
 
     // ardu.enviarReal(realTeste);
 

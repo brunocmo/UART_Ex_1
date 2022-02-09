@@ -3,7 +3,10 @@
 Comms::Comms() {
     this->uart0_filestream = -1;
     this->palavra = "";
-    this->matricula = "7548";
+    this->matricula[0] = 7;
+    this->matricula[1] = 5;
+    this->matricula[2] = 4;
+    this->matricula[3] = 8;
 }
 
 Comms::~Comms() {
@@ -34,10 +37,8 @@ void Comms::solicitar(std::string solicitacao){
     
     unsigned char teste[255];
 
-    teste[0] = solicitacao.at(0);
-
-    for(unsigned int i{1}; i<solicitacao.length() ; i++) {
-        teste[i] = (solicitacao.at(i)-48);
+    for(unsigned int i{0}; i<solicitacao.length() ; i++) {
+        teste[i] = solicitacao.at(i);
 
         printf("%d --- %d\n", i, teste[i]);
     }
@@ -98,26 +99,34 @@ void Comms::pedidoString() {
 }
 
 
-void Comms::enviarInteiro(char inteiroEnviado[4]) {
+void Comms::enviarInteiro(int inteiroEnviado) {
 
     char SolicitacaoInteiro;
     SolicitacaoInteiro = 0xB1;
 
+    char InteiroBytes[4];
+
+    std::memcpy(InteiroBytes, &inteiroEnviado, sizeof(int));
+
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoInteiro);
-    stringTemp = stringTemp + inteiroEnviado + matricula;
+    stringTemp = stringTemp + InteiroBytes + matricula;
 
     solicitar(stringTemp);
 }
 
-void Comms::enviarReal(char floatEnviado[4]) {
+void Comms::enviarReal(float floatEnviado) {
 
     char SolicitacaoFloat;
     SolicitacaoFloat = 0xB2;
 
+    char RealBytes[4];
+
+    std::memcpy(RealBytes, &floatEnviado, sizeof(int));
+
     std::string stringTemp{""};
     stringTemp.push_back(SolicitacaoFloat);
-    stringTemp = stringTemp + floatEnviado + matricula;
+    stringTemp = stringTemp + RealBytes + matricula;
 
     solicitar(stringTemp);
 }
@@ -134,41 +143,41 @@ void Comms::enviarString(std::string stringEnviado) {
     stringTemp.push_back(SolicitacaoString);
     stringTemp = stringTemp + quantidadePalavras + stringEnviado + matricula;
 
-    enviar(stringTemp);
+    solicitar(stringTemp);
 }
 
-void Comms::enviar(std::string solicitacao){
+// void Comms::enviar(std::string solicitacao){
     
-    init();
+//     init();
     
-    unsigned char teste[255];
+//     unsigned char teste[255];
 
-    teste[0] = solicitacao.at(0);
-    teste[1] = solicitacao.at(1);
+//     teste[0] = solicitacao.at(0);
+//     teste[1] = solicitacao.at(1);
 
-    for(unsigned int i{2}; i<solicitacao.length() ; i++) {
+//     for(unsigned int i{2}; i<solicitacao.length() ; i++) {
         
-        if( i < solicitacao.length()-4) {
-            teste[i] = (solicitacao.at(i));
-        }else {
-            teste[i] = (solicitacao.at(i)-48);
-        }
+//         if( i < solicitacao.length()-4) {
+//             teste[i] = (solicitacao.at(i));
+//         }else {
+//             teste[i] = (solicitacao.at(i)-48);
+//         }
         
-        printf("%d --- %d\n", i, teste[i]);
-    }
+//         printf("%d --- %d\n", i, teste[i]);
+//     }
 
-    int count = write( get_uart0_filestream(), &teste, solicitacao.length());
+//     int count = write( get_uart0_filestream(), &teste, solicitacao.length());
 
-    printf("Numero de bytes enviados: %d\n", count);
+//     printf("Numero de bytes enviados: %d\n", count);
 
-    if(count < 0) {
-        printf("Erro no envio de dados - TX\n");
-    }
+//     if(count < 0) {
+//         printf("Erro no envio de dados - TX\n");
+//     }
 
-    sleep(2);
+//     sleep(2);
 
-    receber(3);
-}
+//     receber(3);
+// }
 
 
 
