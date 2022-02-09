@@ -91,7 +91,7 @@ void Comms::pedidoReal() {
 
     solicitar(stringTemp);
 
-    solicitar(stringTemp);
+
 }
 
 void Comms::pedidoString() {
@@ -108,7 +108,7 @@ void Comms::pedidoString() {
 
     solicitar(stringTemp);
 
-    solicitar(stringTemp);
+
 }
 
 

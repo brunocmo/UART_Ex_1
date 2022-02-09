@@ -10,13 +10,13 @@ int main() {
 
     std::string fraseTeste{"Olá Mundo!"};
 
-    ardu.pedidoInteiro();
+    // ardu.pedidoInteiro();
 
     // ardu.pedidoReal();
 
     // ardu.pedidoString();
 
-    //ardu.enviarInteiro(inteiroTeste);
+    ardu.enviarInteiro(inteiroTeste);
 
     // ardu.enviarReal(realTeste);
 
