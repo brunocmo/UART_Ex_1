@@ -30,21 +30,7 @@ void Comms::init() {
 
 void Comms::solicitar(std::string solicitacao){
     
-    set_uart0_filestream( open("/dev/serial0", O_RDWR | O_NOCTTY | O_NDELAY) );
-
-    if ( get_uart0_filestream() == -1 ) {
-        printf("Erro na abertura da UART\n");
-    }
-
-    tcgetattr(uart0_filestream, &options);
-    options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
-    options.c_iflag = IGNPAR;
-    options.c_oflag = 0;
-    options.c_lflag = 0;
-    tcflush(uart0_filestream, TCIFLUSH);
-    tcsetattr(uart0_filestream, TCSANOW, &options);
-
-    printf("Abertura e configuração realizadas\n");
+    init();
     
     unsigned char teste[255];
 
@@ -66,41 +52,13 @@ void Comms::solicitar(std::string solicitacao){
 
     sleep(2);
 
-    int valorInteiro{0};
-
-    if(get_uart0_filestream() != -1) {
-
-        unsigned char rx_buffer[100];
-        int rx_length = read(get_uart0_filestream(), (void*)rx_buffer, 100);
-        if(rx_length < 0){
-            printf("Erro na leitura da UART - RX\n");
-        }
-        else if(rx_length == 0){
-            printf("Nenhum dado disponível\n");
-        } else {
-
-            if( teste[0] == 0xA1 || teste[0] == 0xB1 ) {
-                std::memcpy(&valorInteiro, rx_buffer, 4);
-                printf("Mensagem de comprimento %d: %d\n", rx_length, valorInteiro);
-            } else if( teste[0] == 0xA2 || teste[0] == 0xB2 ) {
-                printf("Mensagem de comprimento %d: %s\n", rx_length, rx_buffer);
-            } else {
-                printf("Mensagem de comprimento %d: %s\n", rx_length, rx_buffer);
-            }
-
-
-        }
+    if (teste[0] == 0xA1 || teste[0] == 0xB1 ) {
+        receber(1);
+    } else if (teste[0] == 0xA2 || teste[0] == 0xB2 ) {
+        receber(2);
+    } else {
+        receber(3);
     }
-
-    close(get_uart0_filestream());
-
-    // if (teste[0] == 0xA1 || teste[0] == 0xB1 ) {
-    //     receber(1);
-    // } else if (teste[0] == 0xA2 || teste[0] == 0xB2 ) {
-    //     receber(2);
-    // } else {
-    //     receber(3);
-    // }
 }
 
 void Comms::pedidoInteiro() {
